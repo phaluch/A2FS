@@ -1,0 +1,36 @@
+# Terraform files
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+crash.log
+*.tfvars
+*.tfplan
+*.tfrc
+!.terraform.lock.hcl
+
+# Python artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+/pip-selfcheck.json
+.venv/
+venv/
+env/
+ENV/
+
+# Build artifacts
+*.zip
+dist/
+build/
+*.egg-info/
+
+# IDE and OS files
+.vscode/
+.idea/
+*.swp
+.DS_Store
+
+# Logs
+*.log

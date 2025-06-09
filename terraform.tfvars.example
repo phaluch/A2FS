@@ -1,0 +1,6 @@
+# Copy this file to terraform.tfvars and fill in your actual values
+# terraform.tfvars is already in your .gitignore
+
+aws_profile = "your-aws-profile-name"
+aws_region  = "us-east-1"
+agent_id    = "your-agent-id-here"
