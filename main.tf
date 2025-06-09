@@ -9,29 +9,20 @@ terraform {
 
 provider "aws" {
   profile = var.aws_profile
-  region  = var.aws_region
 }
 
-# Data source to inspect your existing agent
-data "aws_bedrock_agent" "existing" {
-  agent_id = var.agent_id  # Replace with your actual agent ID
-}
+# Get current AWS account info
+data "aws_caller_identity" "current" {}
+data "aws_partition" "current" {}
+data "aws_region" "current" {}
 
-# Resource to manage the agent
-resource "aws_bedrock_agent" "my_agent" {
-  agent_name               = data.aws_bedrock_agent.existing.agent_name
-  foundation_model         = data.aws_bedrock_agent.existing.foundation_model
-  instruction              = data.aws_bedrock_agent.existing.instruction
-  agent_resource_role_arn  = data.aws_bedrock_agent.existing.agent_resource_role_arn
-  
-  # Add other attributes as needed based on your agent's configuration
-}
 
-# Optional: Output some info about the agent
-output "agent_info" {
-  value = {
-    agent_id   = aws_bedrock_agent.my_agent.agent_id
-    agent_name = aws_bedrock_agent.my_agent.agent_name
-    status     = aws_bedrock_agent.my_agent.agent_status
-  }
+# The Bedrock agent resource
+resource "aws_bedrockagent_agent" "my_agent" {
+  agent_name              = "interface-agent"
+  agent_resource_role_arn = "arn:aws:iam::${var.aws_account_id}:role/service-role/AmazonBedrockExecutionRoleForAgents_QM3EGMJKHJ"
+  foundation_model        = "amazon.nova-lite-v1:0"
+  description             = "An agent that'll interact with the user and, later, orchestrate other agents to achieve the user's goals."
+  instruction             = "You help Pedro manage his life. For now we're in a mock stage, so just make stuff up."
+  idle_session_ttl_in_seconds = 600
 }

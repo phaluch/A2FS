@@ -9,6 +9,11 @@ variable "aws_profile" {
   
 }
 
+variable aws_account_id {
+  description = "The AWS account ID where resources will be deployed"
+  type        = string
+}
+
 variable "agent_id" {
   description = "The ID of the Bedrock agent to manage"
   type        = string

@@ -1,6 +1,7 @@
 # Personal Agent Project
 
 Simple Terraform configuration to manage an existing AWS Bedrock agent, for now.
+Project for learning purposes.
 
 ## Setup
 
